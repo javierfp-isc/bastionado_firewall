@@ -1,5 +1,5 @@
 PROJECT="firewall"
-NET="base_net"
+NET="firewall_sat"
 
 #Targets principales
 install: vagrantup
