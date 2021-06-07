@@ -1,2 +1,2 @@
-# bastionado base
-Repositorio plantilla para los escenarios del módulo de Bastionado
+# bastionado firewall
+Repositorio para prácticas de Firewall con iptables
