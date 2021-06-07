@@ -1,0 +1,115 @@
+version: '3'
+services:
+#Service sa toma el Dockerfile de ./build
+ adm1:
+  build: ./build
+  hostname: adm1
+  env_file: 
+  - "build/envfile"
+  privileged: true
+  networks:
+   administracion:
+    ipv4_address: 192.168.110.111
+ adm2:
+  build: ./build
+  hostname: adm2
+  env_file: 
+  - "build/envfile"
+  privileged: true
+  networks:
+   administracion:
+    ipv4_address: 192.168.110.112
+ pe1:
+  build: ./build
+  hostname: pe1
+  env_file: 
+  - "build/envfile"
+  privileged: true
+  sysctls:
+    net.ipv4.ip_forward: 1
+  networks:
+   administracion:
+    ipv4_address: 192.168.110.201
+   direccion:
+    ipv4_address: 192.168.111.201
+   sat:
+    ipv4_address: 192.168.112.201
+ god10:
+  build: ./build
+  hostname: god10
+  env_file: 
+  - "build/envfile"
+  privileged: true
+  networks:
+   administracion:
+    ipv4_address: 192.168.110.120
+   direccion:
+    ipv4_address: 192.168.111.121
+ dir1:
+  build: ./build
+  hostname: dir1
+  env_file: 
+  - "build/envfile"
+  privileged: true
+  networks:
+   direccion:
+    ipv4_address: 192.168.111.112
+ sat1:
+  build: ./build
+  hostname: sat1
+  privileged: true
+  networks:
+   sat:
+    ipv4_address: 192.168.112.113
+ sat10:
+  build: ./build
+  hostname: sat10
+  env_file: 
+  - "build/envfile"
+  privileged: true
+  networks:
+   sat:
+    ipv4_address: 192.168.112.122
+ pe2:
+  build: ./build
+  hostname: pe2
+  env_file: 
+  - "build/envfile"
+  privileged: true
+  sysctls:
+    net.ipv4.ip_forward: 1
+  networks:
+   sat:
+    ipv4_address: 192.168.112.202
+   dmz:
+    ipv4_address: 192.168.120.202
+ server1:
+  build: ./build
+  hostname: server1
+  env_file: 
+  - "build/envfile"
+  privileged: true
+  networks:
+   dmz:
+    ipv4_address: 192.168.120.121
+networks:
+  administracion:
+    driver: bridge
+    ipam:
+     config:
+       - subnet: 192.168.110.0/24
+  direccion:
+    driver: bridge
+    ipam:
+     config:
+       - subnet: 192.168.111.0/24
+  sat:
+    driver: bridge
+    ipam:
+     config:
+       - subnet: 192.168.112.0/24
+  dmz:
+    driver: bridge
+    ipam:
+     config:
+       - subnet: 192.168.120.0/24

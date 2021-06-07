@@ -1,0 +1,7 @@
+#Lista de paquetes de utilidades de la imagen
+PAQUTILS="vim curl iputils-ping net-tools nano wget procps"
+#Lista de paquetes para desarrollo de la imagen
+PAQDEV="iptables traceroute"
+#Comandos a ejecutar al crear la imagen separados por ","
+COMMANDS="touch /tmp/archivo,mkdir /tmp/dir,echo \"hola mundo\" > /tmp/saludo"
+
