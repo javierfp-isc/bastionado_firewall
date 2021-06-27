@@ -1,29 +1,56 @@
 version: '3'
 services:
-#Service sa toma el Dockerfile de ./build
+#Services
  adm1:
-  build: ./build
+  build: ./adm
   hostname: adm1
   env_file: 
-  - "build/envfile"
+  - "adm/envfile"
   privileged: true
   networks:
    administracion:
     ipv4_address: 192.168.110.111
  adm2:
-  build: ./build
+  build: ./adm
   hostname: adm2
   env_file: 
-  - "build/envfile"
+  - "adm/envfile"
   privileged: true
   networks:
    administracion:
     ipv4_address: 192.168.110.112
- pe1:
-  build: ./build
-  hostname: pe1
+ dir1:
+  build: ./dir
+  hostname: dir1
   env_file: 
-  - "build/envfile"
+  - "dir/envfile"
+  privileged: true
+  networks:
+   direccion:
+    ipv4_address: 192.168.111.112
+ sat1:
+  build: ./sat
+  hostname: sat1
+  env_file: 
+  - "sat/envfile"
+  privileged: true
+  networks:
+   sat:
+    ipv4_address: 192.168.112.113
+ sat2:
+  build: ./sat
+  hostname: sat2
+  env_file: 
+  - "sat/envfile"
+  privileged: true
+  networks:
+   sat:
+    ipv4_address: 192.168.112.122
+ rl:
+  build: ./rl
+  hostname: rl
+  env_file: 
+  - "rl/envfile"
   privileged: true
   sysctls:
     net.ipv4.ip_forward: 1
@@ -34,47 +61,11 @@ services:
     ipv4_address: 192.168.111.201
    sat:
     ipv4_address: 192.168.112.201
- god10:
-  build: ./build
-  hostname: god10
+ rdi:
+  build: ./rdi
+  hostname: rdi
   env_file: 
-  - "build/envfile"
-  privileged: true
-  networks:
-   administracion:
-    ipv4_address: 192.168.110.120
-   direccion:
-    ipv4_address: 192.168.111.121
- dir1:
-  build: ./build
-  hostname: dir1
-  env_file: 
-  - "build/envfile"
-  privileged: true
-  networks:
-   direccion:
-    ipv4_address: 192.168.111.112
- sat1:
-  build: ./build
-  hostname: sat1
-  privileged: true
-  networks:
-   sat:
-    ipv4_address: 192.168.112.113
- sat10:
-  build: ./build
-  hostname: sat10
-  env_file: 
-  - "build/envfile"
-  privileged: true
-  networks:
-   sat:
-    ipv4_address: 192.168.112.122
- pe2:
-  build: ./build
-  hostname: pe2
-  env_file: 
-  - "build/envfile"
+  - "rdi/envfile"
   privileged: true
   sysctls:
     net.ipv4.ip_forward: 1
@@ -83,11 +74,22 @@ services:
     ipv4_address: 192.168.112.202
    dmz:
     ipv4_address: 192.168.120.202
- server1:
-  build: ./build
-  hostname: server1
+ rde:
+  build: ./rde
+  hostname: rde
   env_file: 
-  - "build/envfile"
+  - "rde/envfile"
+  privileged: true
+  sysctls:
+    net.ipv4.ip_forward: 1
+  networks:
+   dmz:
+    ipv4_address: 192.168.120.203
+ www:
+  build: ./dmz
+  hostname: www
+  env_file: 
+  - "dmz/envfile"
   privileged: true
   networks:
    dmz:

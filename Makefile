@@ -2,13 +2,17 @@ PROJECT="firewall"
 NET="firewall_sat"
 
 #Targets principales
-install: vagrantup
+#install: vagrantup
+install: composeup
 
-uninstall: vagrantdown	
+#uninstall: vagrantdown
+uninstall: composedown
 
-start: vagrantstart
+#start: vagrantstart
+start: composestart
 
-stop: vagrantstop
+#stop: vagrantstop
+stop: composestop
 
 #Requisitos
 vagrantup: composeup vagrantsust	
