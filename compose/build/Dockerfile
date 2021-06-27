@@ -6,8 +6,11 @@ ENV PATH /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 LABEL distribucion="Debian 10"
 LABEL maintainer=javierfp@iessanclemente.net
 
+#Argumento tomado del docker-compose.yml para seleccionar el archivo .env->envfile
+ARG ENVPATH
+
 #Copiamos el envfile al container
-COPY envfile /tmp/envfile
+COPY ${ENVPATH} /tmp/envfile
 
 #Copiamos el entrypoint.sh al container
 COPY entrypoint.sh /usr/bin/entrypoint.sh

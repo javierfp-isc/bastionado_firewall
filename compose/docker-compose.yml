@@ -1,56 +1,62 @@
-version: '3'
+version: '3.5'
 services:
 #Services
  adm1:
-  build: ./adm
+  build:
+    context: build
+    args:
+     ENVPATH: adm.env
   hostname: adm1
-  env_file: 
-  - "adm/envfile"
   privileged: true
   networks:
    administracion:
     ipv4_address: 192.168.110.111
  adm2:
-  build: ./adm
+  build:
+    context: build
+    args:
+     ENVPATH: adm.env
   hostname: adm2
-  env_file: 
-  - "adm/envfile"
   privileged: true
   networks:
    administracion:
     ipv4_address: 192.168.110.112
  dir1:
-  build: ./dir
+  build:
+    context: build
+    args:
+     ENVPATH: dir.env
   hostname: dir1
-  env_file: 
-  - "dir/envfile"
   privileged: true
   networks:
    direccion:
     ipv4_address: 192.168.111.112
  sat1:
-  build: ./sat
+  build:
+    context: build
+    args:
+     ENVPATH: sat.env
   hostname: sat1
-  env_file: 
-  - "sat/envfile"
   privileged: true
   networks:
    sat:
     ipv4_address: 192.168.112.113
  sat2:
-  build: ./sat
+  build:
+    context: build
+    args:
+     ENVPATH: sat.env
   hostname: sat2
-  env_file: 
-  - "sat/envfile"
   privileged: true
   networks:
    sat:
     ipv4_address: 192.168.112.122
  rl:
-  build: ./rl
+  build:
+    context: build
+    args:
+     ENVPATH: rl.env
   hostname: rl
-  env_file: 
-  - "rl/envfile"
   privileged: true
   sysctls:
     net.ipv4.ip_forward: 1
@@ -62,10 +68,11 @@ services:
    sat:
     ipv4_address: 192.168.112.201
  rdi:
-  build: ./rdi
+  build:
+    context: build
+    args:
+     ENVPATH: rdi.env
   hostname: rdi
-  env_file: 
-  - "rdi/envfile"
   privileged: true
   sysctls:
     net.ipv4.ip_forward: 1
@@ -75,10 +82,11 @@ services:
    dmz:
     ipv4_address: 192.168.120.202
  rde:
-  build: ./rde
+  build:
+    context: build
+    args:
+     ENVPATH: rde.env
   hostname: rde
-  env_file: 
-  - "rde/envfile"
   privileged: true
   sysctls:
     net.ipv4.ip_forward: 1
@@ -86,10 +94,11 @@ services:
    dmz:
     ipv4_address: 192.168.120.203
  www:
-  build: ./dmz
+  build:
+    context: build
+    args:
+     ENVPATH: dmz.env
   hostname: www
-  env_file: 
-  - "dmz/envfile"
   privileged: true
   networks:
    dmz:
