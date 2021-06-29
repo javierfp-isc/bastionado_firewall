@@ -9,7 +9,7 @@ services:
   hostname: adm1
   privileged: true
   networks:
-   administracion:
+   adm:
     ipv4_address: 192.168.110.111
  adm2:
   build:
@@ -19,7 +19,7 @@ services:
   hostname: adm2
   privileged: true
   networks:
-   administracion:
+   adm:
     ipv4_address: 192.168.110.112
  dir1:
   build:
@@ -29,7 +29,7 @@ services:
   hostname: dir1
   privileged: true
   networks:
-   direccion:
+   dir:
     ipv4_address: 192.168.111.112
  sat1:
   build:
@@ -61,9 +61,9 @@ services:
   sysctls:
     net.ipv4.ip_forward: 1
   networks:
-   administracion:
+   adm:
     ipv4_address: 192.168.110.201
-   direccion:
+   dir:
     ipv4_address: 192.168.111.201
    sat:
     ipv4_address: 192.168.112.201
@@ -104,23 +104,31 @@ services:
    dmz:
     ipv4_address: 192.168.120.121
 networks:
-  administracion:
+  adm:
     driver: bridge
+    driver_opts:
+     com.docker.network.bridge.name: firewall_adm
     ipam:
      config:
        - subnet: 192.168.110.0/24
-  direccion:
+  dir:
     driver: bridge
+    driver_opts:
+     com.docker.network.bridge.name: firewall_dir
     ipam:
      config:
        - subnet: 192.168.111.0/24
   sat:
     driver: bridge
+    driver_opts:
+     com.docker.network.bridge.name: firewall_sat
     ipam:
      config:
        - subnet: 192.168.112.0/24
   dmz:
     driver: bridge
+    driver_opts:
+     com.docker.network.bridge.name: firewall_dmz
     ipam:
      config:
        - subnet: 192.168.120.0/24
