@@ -11,6 +11,8 @@ services:
   networks:
    adm:
     ipv4_address: 192.168.110.111
+  volumes:
+   - iptadm1:/etc/iptables
  adm2:
   build:
     context: build
@@ -21,6 +23,8 @@ services:
   networks:
    adm:
     ipv4_address: 192.168.110.112
+  volumes:
+   - iptadm2:/etc/iptables
  dir1:
   build:
     context: build
@@ -31,6 +35,8 @@ services:
   networks:
    dir:
     ipv4_address: 192.168.111.112
+  volumes:
+   - iptdir1:/etc/iptables
  sat1:
   build:
     context: build
@@ -41,6 +47,8 @@ services:
   networks:
    sat:
     ipv4_address: 192.168.112.113
+  volumes:
+   - iptsat1:/etc/iptables
  sat2:
   build:
     context: build
@@ -51,6 +59,20 @@ services:
   networks:
    sat:
     ipv4_address: 192.168.112.122
+  volumes:
+   - iptsat2:/etc/iptables
+ www:
+  build:
+    context: build
+    args:
+     ENVPATH: dmz.env
+  hostname: www
+  privileged: true
+  networks:
+   dmz:
+    ipv4_address: 192.168.120.121
+  volumes:
+   - iptwww:/etc/iptables
  rl:
   build:
     context: build
@@ -67,6 +89,8 @@ services:
     ipv4_address: 192.168.111.201
    sat:
     ipv4_address: 192.168.112.201
+  volumes:
+   - iptrl:/etc/iptables
  rdi:
   build:
     context: build
@@ -81,6 +105,8 @@ services:
     ipv4_address: 192.168.112.202
    dmz:
     ipv4_address: 192.168.120.202
+  volumes:
+   - iptrdi:/etc/iptables
  rde:
   build:
     context: build
@@ -93,16 +119,8 @@ services:
   networks:
    dmz:
     ipv4_address: 192.168.120.203
- www:
-  build:
-    context: build
-    args:
-     ENVPATH: dmz.env
-  hostname: www
-  privileged: true
-  networks:
-   dmz:
-    ipv4_address: 192.168.120.121
+  volumes:
+   - iptrde:/etc/iptables
 networks:
   adm:
     driver: bridge
@@ -132,3 +150,13 @@ networks:
     ipam:
      config:
        - subnet: 192.168.120.0/24
+volumes:
+ iptadm1:
+ iptadm2:
+ iptdir1:
+ iptsat1:
+ iptsat2:
+ iptwww:
+ iptrl:
+ iptrdi:
+ iptrde:
