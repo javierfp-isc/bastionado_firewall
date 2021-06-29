@@ -119,6 +119,8 @@ services:
   networks:
    dmz:
     ipv4_address: 192.168.120.203
+   ext:
+    ipv4_address: 192.168.200.203
   volumes:
    - iptrde:/etc/iptables
 networks:
@@ -150,6 +152,13 @@ networks:
     ipam:
      config:
        - subnet: 192.168.120.0/24
+  ext:
+    driver: bridge
+    driver_opts:
+     com.docker.network.bridge.name: firewall_ext
+    ipam:
+     config:
+       - subnet: 192.168.200.0/24
 volumes:
  iptadm1:
  iptadm2:
