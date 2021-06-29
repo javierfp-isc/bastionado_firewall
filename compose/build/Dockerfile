@@ -19,10 +19,7 @@ COPY entrypoint.sh /usr/bin/entrypoint.sh
 RUN chmod +x /usr/bin/entrypoint.sh
 
 #Instalamos paquetes de utilidades del envfile
-RUN /bin/bash -c 'source /tmp/envfile; apt update; apt install -y $PAQUTILS'
-
-#Instalamos paquetes de desarrollo del envfile
-RUN /bin/bash -c 'source /tmp/envfile; apt update; apt install -y $PAQDEV'
+RUN /bin/bash -c 'source /tmp/envfile; apt update; apt install -y $PACKS'
 
 #Ejecutamos lista de comandos del envfile
 RUN /bin/bash -c 'source /tmp/envfile;IFS=',';for command in $COMMANDS;do sh -c $command;done'
