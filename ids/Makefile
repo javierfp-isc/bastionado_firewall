@@ -1,4 +1,4 @@
-PROJECT="firewall"
+PROJECT="perimetral"
 
 #Targets principales
 #install: vagrantup
@@ -23,11 +23,12 @@ composeup:
 
 vagrantdelete: composedelete vagrantsust
 	cd /tmp && vagrant destroy -f
-composedelete:
-	docker-compose -p ${PROJECT} -f compose/docker-compose.yml down --rmi all -v
+composedelete: composedown
+	docker rmi -f ${PROJECT}_rde
 
 composedown:
-	docker-compose -p ${PROJECT} -f compose/docker-compose.yml down
+	docker-compose -p ${PROJECT} -f compose/docker-compose.yml stop
+	docker-compose -p ${PROJECT} -f compose/docker-compose.yml rm -f
 
 vagrantstart: composestart vagrantsust
 	cd /tmp && vagrant up
