@@ -1,5 +1,5 @@
 PROJECT="perimetral"
-SERVICES="rde"
+SERVICES="squid"
 
 #Targets principales
 #install: vagrantup

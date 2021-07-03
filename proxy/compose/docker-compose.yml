@@ -1,0 +1,25 @@
+version: '3.5'
+services:
+#Services
+ squid:
+  build:
+    context: build
+    args:
+     ENVPATH: squid.env
+  hostname: squid
+  privileged: true
+  networks:
+   ext:
+    ipv4_address: 192.168.200.201
+  volumes:
+   - iptsquid:/etc/iptables
+networks:
+  ext:
+    driver: bridge
+    driver_opts:
+     com.docker.network.bridge.name: firewall_ext
+    ipam:
+     config:
+       - subnet: 192.168.200.0/24
+volumes:
+ iptsquid:
