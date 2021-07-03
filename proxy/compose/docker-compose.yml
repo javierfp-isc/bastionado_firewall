@@ -13,6 +13,20 @@ services:
     ipv4_address: 192.168.200.201
   volumes:
    - iptsquid:/etc/iptables
+   - squid:/etc/squid
+ nginx:
+  build:
+    context: build
+    args:
+     ENVPATH: nginx.env
+  hostname: nginx
+  privileged: true
+  networks:
+   ext:
+    ipv4_address: 192.168.200.202
+  volumes:
+   - iptnginx:/etc/iptables
+   - nginx:/etc/nginx
 networks:
   ext:
     driver: bridge
@@ -23,3 +37,6 @@ networks:
        - subnet: 192.168.200.0/24
 volumes:
  iptsquid:
+ iptnginx:
+ squid:
+ nginx:

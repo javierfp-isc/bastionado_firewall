@@ -17,6 +17,7 @@ services:
     ipv4_address: 192.168.200.203
   volumes:
    - iptrde:/etc/iptables
+   - snort:/etc/snort
 networks:
   dmz:
     driver: bridge
@@ -34,3 +35,4 @@ networks:
        - subnet: 192.168.200.0/24
 volumes:
  iptrde:
+ snort:
