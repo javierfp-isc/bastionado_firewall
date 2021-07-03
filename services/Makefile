@@ -1,5 +1,5 @@
 PROJECT="perimetral"
-SERVICES="rde"
+SERVICES="wordpress moodle"
 
 #Targets principales
 #install: vagrantup

@@ -1,0 +1,46 @@
+version: '3.5'
+services:
+#Services
+ wordpress:
+  build:
+    context: build
+    args:
+     ENVPATH: wordpress.env
+  hostname: wordpress
+  privileged: true
+  networks:
+   dmz:
+    ipv4_address: 192.168.120.122
+  volumes:
+   - iptwordpress:/etc/iptables
+   - wpmysql:/var/lib/mysql
+   - wpapache:/var/www/html
+ moodle:
+  build:
+    context: build
+    args:
+     ENVPATH: moodle.env
+  hostname: moodle
+  privileged: true
+  networks:
+   dmz:
+    ipv4_address: 192.168.120.123
+  volumes:
+   - iptmoodle:/etc/iptables
+   - moodmysql:/var/lib/mysql
+   - moodapache:/var/www/html
+networks:
+  dmz:
+    driver: bridge
+    driver_opts:
+     com.docker.network.bridge.name: firewall_dmz
+    ipam:
+     config:
+       - subnet: 192.168.120.0/24
+volumes:
+ iptwordpress:
+ iptmoodle:
+ wpmysql:
+ wpapache:
+ moodmysql:
+ moodapache:

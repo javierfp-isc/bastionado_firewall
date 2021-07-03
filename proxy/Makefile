@@ -16,6 +16,15 @@ start: composestart
 #stop: vagrantstop
 stop: composestop
 
+sh:
+	docker-compose -p ${PROJECT} -f compose/docker-compose.yml exec ${service} bash
+
+info:
+	docker inspect ${PROJECT}_${service}_1
+
+ls:
+	docker-compose -p ${PROJECT} -f compose/docker-compose.yml ps
+
 #Requisitos
 vagrantup: composeup	
 	cd /tmp && vagrant up
