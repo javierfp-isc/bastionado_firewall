@@ -1,6 +1,23 @@
 version: '3.5'
 services:
 #Services
+ rdi:
+  build:
+    context: build
+    args:
+     ENVPATH: rdi.env
+  hostname: rdi
+  privileged: true
+  sysctls:
+    net.ipv4.ip_forward: 1
+  networks:
+   sat:
+    ipv4_address: 192.168.112.202
+   dmz:
+    ipv4_address: 192.168.120.202
+  volumes:
+   - iptrdi:/etc/iptables
+   - suricata:/etc/suricata
  rde:
   build:
     context: build
@@ -17,8 +34,15 @@ services:
     ipv4_address: 192.168.200.203
   volumes:
    - iptrde:/etc/iptables
-   - snort:/etc/snort
+   - snort:/etc/snort 
 networks:
+  sat:
+    driver: bridge
+    driver_opts:
+     com.docker.network.bridge.name: firewall_sat
+    ipam:
+     config:
+       - subnet: 192.168.112.0/24
   dmz:
     driver: bridge
     driver_opts:
@@ -34,5 +58,7 @@ networks:
      config:
        - subnet: 192.168.200.0/24
 volumes:
+ iptrdi:
  iptrde:
  snort:
+ suricata:

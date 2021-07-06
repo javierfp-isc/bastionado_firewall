@@ -1,5 +1,5 @@
 PROJECT="perimetral"
-SERVICES="rde"
+SERVICES="rdi rde"
 
 #Targets principales
 #install: vagrantup
@@ -34,7 +34,7 @@ composeup:
 vagrantdelete: composedelete vagrantsust
 	cd /tmp && vagrant destroy -f
 composedelete: composedown
-	docker rmi -f ${PROJECT}_${SERVICES}
+	for s in ${SERVICES};do docker rmi -f ${PROJECT}_$$s;done
 
 composedown:
 	docker-compose -p ${PROJECT} -f compose/docker-compose.yml stop
