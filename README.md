@@ -4,7 +4,7 @@ Repositorio para prácticas relacionadas con la seguridad perimetral
 El repositorio consta de los siguentes escenarios
 
 * **firewall**: Escenario para prácticas de Firewall con iptables
-* **ids**: Escenario para prácticas de IDS/IPS Snort
+* **ids**: Escenario para prácticas de IDS/IPS Snort y Suricata
 * **proxy**: Escenario para prácticas de proxy inverso con nginx
 * **services**: Escenario para lanzar servicios web para hacer tests
 
