@@ -16,6 +16,8 @@ start: composestart
 #stop: vagrantstop
 stop: composestop
 
+restart: stop start
+
 sh:
 	docker-compose -p ${PROJECT} -f compose/docker-compose.yml exec ${service} bash
 
@@ -40,12 +42,12 @@ composedown:
 	docker-compose -p ${PROJECT} -f compose/docker-compose.yml stop
 	docker-compose -p ${PROJECT} -f compose/docker-compose.yml rm -f
 
-vagrantstart: composestart vagrantsust
+vagrantstart: composestart
 	cd /tmp && vagrant up
 composestart:
 	docker-compose -p ${PROJECT} -f compose/docker-compose.yml start	
 
-vagrantstop: composestop vagrantsust
+vagrantstop: composestop
 	cd /tmp && vagrant halt
 composestop:
 	docker-compose -p ${PROJECT} -f compose/docker-compose.yml stop
