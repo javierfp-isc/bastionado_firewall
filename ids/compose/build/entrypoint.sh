@@ -3,6 +3,10 @@
 #Si existe el archivo /etc/routes lo ejecuta
 [ -f /etc/routes ] && sh /etc/routes
 
+#Establece los servidores DNS a 8.8.8.8 y 8.8.4.4
+echo "nameserver 8.8.8.8" > /etc/resolv.conf
+echo "nameserver 8.8.4.4" >> /etc/resolv.conf 
+
 #Arrancamos snort si existe el servicio
 [ -f /etc/snort/snort.conf ] && snort -A console -i eth1 -u snort -g snort -c /etc/snort/snort.conf
 
