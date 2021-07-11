@@ -44,6 +44,12 @@ Si ejecutamos:
 
 detenemos los containers del escenario
 
+Con:
+
+`make restart`
+
+reiniciamos el escenario (stop->start)
+
 ### Acceder por terminal a un service del escenario
 
 Para acceder por terminal de línea de comandos a un service (container) usando su nombre de service, ejecutamos:
