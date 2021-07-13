@@ -11,10 +11,10 @@ services:
   sysctls:
     net.ipv4.ip_forward: 1
   networks:
-   sat:
-    ipv4_address: 192.168.112.202
    dmz:
     ipv4_address: 192.168.120.202
+   sat:
+    ipv4_address: 192.168.112.202
   volumes:
    - iptrdi:/etc/iptables
    - suricata:/etc/suricata
