@@ -1,5 +1,5 @@
 PROJECT="perimetral"
-SERVICES="squid nginx"
+SERVICES=squid nginx
 
 #Targets principales
 #install: vagrantup

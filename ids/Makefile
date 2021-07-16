@@ -1,5 +1,5 @@
 PROJECT="perimetral"
-SERVICES="rdi rde"
+SERVICES=rdi rde
 
 #Targets principales
 #install: vagrantup

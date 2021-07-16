@@ -9,8 +9,8 @@ services:
   hostname: squid
   privileged: true
   networks:
-   ext:
-    ipv4_address: 192.168.200.201
+   sat:
+    ipv4_address: 192.168.112.200
   volumes:
    - iptsquid:/etc/iptables
    - squid:/etc/squid
@@ -28,6 +28,13 @@ services:
    - iptnginx:/etc/iptables
    - nginx:/etc/nginx
 networks:
+  sat:
+    driver: bridge
+    driver_opts:
+     com.docker.network.bridge.name: firewall_sat
+    ipam:
+     config:
+       - subnet: 192.168.112.0/24
   ext:
     driver: bridge
     driver_opts:
