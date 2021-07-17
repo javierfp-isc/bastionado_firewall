@@ -11,7 +11,7 @@ echo "nameserver 8.8.4.4" >> /etc/resolv.conf
 [ -f /etc/iptables/rules.v4 ] && iptables-restore < /etc/iptables/rules.v4
 
 #Arrancamos squid
-[ -f /etc/squid/squid.conf ] && /usr/sbin/squid -sYC
+[ -f /etc/squid/squid.conf ] && service squid start
 
 #Arrancamos nginx
 [ -f /etc/nginx/nginx.conf ] && /usr/sbin/nginx -g 'daemon on; master_process on;'
