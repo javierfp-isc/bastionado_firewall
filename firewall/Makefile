@@ -1,19 +1,21 @@
 PROJECT="perimetral"
+SERVICES=adm1 adm2 dir1 rde rdi rl sat1 sat2 www
 
 #Targets principales
-#install: vagrantup
-install: composeup
+install:
+	docker-compose -p ${PROJECT} -f compose/docker-compose.yml up -d
 
-down: composedown
+down:
+	docker-compose -p ${PROJECT} -f compose/docker-compose.yml down
 
-#delete: vagrantdelete
-delete: composedelete
+delete:
+	docker-compose -p ${PROJECT} -f compose/docker-compose.yml down --rmi all -v
 
-#start: vagrantstart
-start: composestart
+start:
+	docker-compose -p ${PROJECT} -f compose/docker-compose.yml start
 
-#stop: vagrantstop
-stop: composestop
+stop:
+	docker-compose -p ${PROJECT} -f compose/docker-compose.yml stop
 
 restart: stop start
 
@@ -26,28 +28,13 @@ info:
 ls:
 	docker-compose -p ${PROJECT} -f compose/docker-compose.yml ps
 
-#Requisitos
-vagrantup: composeup	
-	cd /tmp && vagrant up
-composeup:	
-	docker-compose -p ${PROJECT} -f compose/docker-compose.yml up -d
+fwdown:
+	for s in ${SERVICES};do docker-compose -p ${PROJECT} -f compose/docker-compose.yml exec $$s /usr/sbin/iptables -P INPUT ACCEPT;done
+	for s in ${SERVICES};do docker-compose -p ${PROJECT} -f compose/docker-compose.yml exec $$s /usr/sbin/iptables -P FORWARD ACCEPT;done
+	for s in ${SERVICES};do docker-compose -p ${PROJECT} -f compose/docker-compose.yml exec $$s /usr/sbin/iptables -P OUTPUT ACCEPT;done
 
-vagrantdelete: composedelete vagrantsust
-	cd /tmp && vagrant destroy -f
-composedelete:
-	docker-compose -p ${PROJECT} -f compose/docker-compose.yml down --rmi all -v
-
-composedown:
-	docker-compose -p ${PROJECT} -f compose/docker-compose.yml down
-
-vagrantstart: composestart
-	cd /tmp && vagrant up
-composestart:
-	docker-compose -p ${PROJECT} -f compose/docker-compose.yml start	
-
-vagrantstop: composestop
-	cd /tmp && vagrant halt
-composestop:
-	docker-compose -p ${PROJECT} -f compose/docker-compose.yml stop
-
+fwup:
+	for s in ${SERVICES};do docker-compose -p ${PROJECT} -f compose/docker-compose.yml exec $$s /usr/sbin/iptables -P INPUT DROP;done
+	for s in ${SERVICES};do docker-compose -p ${PROJECT} -f compose/docker-compose.yml exec $$s /usr/sbin/iptables -P FORWARD DROP;done
+	for s in ${SERVICES};do docker-compose -p ${PROJECT} -f compose/docker-compose.yml exec $$s /usr/sbin/iptables -P OUTPUT DROP;done
 
