@@ -34,7 +34,8 @@ services:
     ipv4_address: 192.168.200.203
   volumes:
    - iptrde:/etc/iptables
-   - snort:/etc/snort 
+   - snort:/etc/snort
+   - /lib/modules:/lib/modules
 networks:
   sat:
     driver: bridge
