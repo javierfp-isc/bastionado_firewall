@@ -14,7 +14,8 @@ echo "nameserver 8.8.4.4" >> /etc/resolv.conf
 if [ -f /etc/snort/snort.conf ]
 then
         #snort -A console -i eth1 -u snort -g snort -c /etc/snort/snort.conf
-        snort -D -i eth1 -I -u snort -g snort -K ascii -c /etc/snort/snort.conf && snort -D -i eth0  -I -u snort -g snort -K ascii -c /etc/snort/snort.conf
+        snort -D -i eth1 -I -u snort -g snort -K ascii -c /etc/snort/snort.conf &
+	snort -D -i eth0  -I -u snort -g snort -K ascii -c /etc/snort/snort.conf &
 fi
 
 
