@@ -23,10 +23,10 @@ fi
 if [ -f /etc/suricata/suricata.yaml ]
 then
 	rm /var/run/suricata.pid
-	/usr/bin/suricata -c /etc/suricata/suricata.yaml --pidfile /var/run/suricata.pid --pcap -D
+	#/usr/bin/suricata -c /etc/suricata/suricata.yaml --pidfile /var/run/suricata.pid --pcap -D
 	#/usr/bin/suricata -c /etc/suricata/suricata.yaml --pidfile /var/run/suricata.pid --af-packet -D
 	#Para el modo de captura nfqueue es necesario meter reglas iptables
-	#/usr/bin/suricata -c /etc/suricata/suricata.yaml --pidfile /var/run/suricata.pid -q 0 -D
+	/usr/bin/suricata -c /etc/suricata/suricata.yaml --pidfile /var/run/suricata.pid -q 0 -D
 fi
 
 #Uso exec para lanzar un proceso independiente de bucle infinito
