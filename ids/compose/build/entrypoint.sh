@@ -7,8 +7,8 @@
 echo "nameserver 8.8.8.8" > /etc/resolv.conf
 echo "nameserver 8.8.4.4" >> /etc/resolv.conf
 
-#Cargamos iptables almacenadas
-[ -f /etc/iptables/rules.v4 ] && iptables-restore < /etc/iptables/rules.v4
+#Cargamos iptables almacenadas (deshabilitado)
+#[ -f /etc/iptables/rules.v4 ] && iptables-restore < /etc/iptables/rules.v4
 
 #Arrancamos snort si existe el servicio
 if [ -f /etc/snort/snort.conf ]
