@@ -65,7 +65,7 @@ services:
   build:
     context: build
     args:
-     ENVPATH: dmz.env
+     ENVPATH: www.env
   hostname: www
   privileged: true
   networks:

@@ -14,7 +14,6 @@ services:
   volumes:
    - iptwordpress:/etc/iptables
    - wpmysql:/var/lib/mysql
-   - wpapache:/var/www/html
  moodle:
   build:
     context: build
@@ -28,7 +27,19 @@ services:
   volumes:
    - iptmoodle:/etc/iptables
    - moodmysql:/var/lib/mysql
-   - moodapache:/var/www/html
+ dvwa:
+  build:
+    context: build
+    args:
+     ENVPATH: dvwa.env
+  hostname: dvwa
+  privileged: true
+  networks:
+   dmz:
+    ipv4_address: 192.168.120.124
+  volumes:
+   - iptdvwa:/etc/iptables
+   - dvwamysql:/var/lib/mysql
 networks:
   dmz:
     driver: bridge
@@ -40,7 +51,7 @@ networks:
 volumes:
  iptwordpress:
  iptmoodle:
+ iptdvwa:
  wpmysql:
- wpapache:
  moodmysql:
- moodapache:
+ dvwamysql:
