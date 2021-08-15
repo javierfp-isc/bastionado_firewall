@@ -29,14 +29,3 @@ info:
 ls:
 	docker-compose -p ${PROJECT} -f compose/docker-compose.yml ps
 
-fwdown:
-	for s in ${SERVICES};do docker-compose -p ${PROJECT} -f compose/docker-compose.yml exec $$s /usr/sbin/iptables -P INPUT ACCEPT;done
-	for s in ${SERVICES};do docker-compose -p ${PROJECT} -f compose/docker-compose.yml exec $$s /usr/sbin/iptables -P FORWARD ACCEPT;done
-	for s in ${SERVICES};do docker-compose -p ${PROJECT} -f compose/docker-compose.yml exec $$s /usr/sbin/iptables -P OUTPUT ACCEPT;done
-
-fwup:
-	for s in ${SERVICES};do docker-compose -p ${PROJECT} -f compose/docker-compose.yml exec $$s /usr/sbin/iptables -P INPUT DROP;done
-	for s in ${SERVICES};do docker-compose -p ${PROJECT} -f compose/docker-compose.yml exec $$s /usr/sbin/iptables -P FORWARD DROP;done
-	for s in ${SERVICES};do docker-compose -p ${PROJECT} -f compose/docker-compose.yml exec $$s /usr/sbin/iptables -P OUTPUT DROP;done
-
-
