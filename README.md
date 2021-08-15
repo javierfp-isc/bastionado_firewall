@@ -75,3 +75,17 @@ Para eliminar los containers de un escenario, solamente éstos, sin eliminar net
 Si además queremos eliminar también las imágenes, ejecutamos:
 
 `make delete`
+
+### Deshabilitar Firewall
+
+En todos los escenarios, menos en **services**, se disponen también de dos targets que permiten deshabilitar y habilitar, mediante iptables, netfilter. Realmente lo que hacen es actuar sobre las POLICY de las cadenas INPUT, OUTPUT y FORWARD, estableciendo ésta ACCEPT. El efecto resultante es que el tráfico no se bloquea. Esto puede resultar útil para hacer pruebas sin que el firewall "moleste".
+
+Los targets son:
+
+`make fwdown`
+
+Establece las políticas a ACCEPT para todos los elementos del escenario.
+
+`make fwup`
+
+Reestablece las políticas a DROP para todos los elementos del escenario.
