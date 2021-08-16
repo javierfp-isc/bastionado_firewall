@@ -7,8 +7,8 @@
 echo "nameserver 8.8.8.8" > /etc/resolv.conf
 echo "nameserver 8.8.4.4" >> /etc/resolv.conf
 
-#Cargamos iptables almacenadas (deshabilitado)
-#[ -f /etc/iptables/rules.v4 ] && iptables-restore < /etc/iptables/rules.v4
+#Cargamos iptables almacenadas
+[ -f /etc/iptables/rules.v4 ] && iptables-restore < /etc/iptables/rules.v4
 
 #Arrancamos snort si existe el servicio
 if [ -f /etc/snort/snort.conf ]
@@ -17,7 +17,6 @@ then
         snort -D -i eth1 -I -u snort -g snort -K ascii -c /etc/snort/snort.conf &
 	snort -D -i eth0  -I -u snort -g snort -K ascii -c /etc/snort/snort.conf &
 fi
-
 
 #Arrancamos suricata si existe el servicio
 if [ -f /etc/suricata/suricata.yaml ]
@@ -28,6 +27,9 @@ then
 	#Para el modo de captura nfqueue es necesario meter reglas iptables
 	/usr/bin/suricata -c /etc/suricata/suricata.yaml --pidfile /var/run/suricata.pid -q 0 -D
 fi
+
+#Arrancamos filebeat si existe
+[ -f /etc/init.d/filebeat ] && /etc/init.d/filebeat start
 
 #Uso exec para lanzar un proceso independiente de bucle infinito
 exec bash -c "while true;do sleep 10;done"
