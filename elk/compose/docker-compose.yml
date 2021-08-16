@@ -1,0 +1,26 @@
+version: '3.5'
+services:
+#Services
+ elk:
+  build:
+    context: build
+    args:
+     ENVPATH: elk.env
+  hostname: elk
+  privileged: true
+  volumes:
+    - /sys/fs/cgroup:/sys/fs/cgroup:ro
+    - iptelk:/etc/iptables
+  networks:
+   sat:
+    ipv4_address: 192.168.112.150
+networks:
+  sat:
+    driver: bridge
+    driver_opts:
+     com.docker.network.bridge.name: firewall_sat
+    ipam:
+     config:
+       - subnet: 192.168.112.0/24
+volumes:
+ iptelk:
