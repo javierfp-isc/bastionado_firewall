@@ -8,6 +8,11 @@ services:
      ENVPATH: elk.env
   hostname: elk
   privileged: true
+#  deploy:
+#   resources:
+#    limits:
+#     cpus: 2
+#     memory: 4096M
   volumes:
     - /sys/fs/cgroup:/sys/fs/cgroup:ro
     - iptelk:/etc/iptables
