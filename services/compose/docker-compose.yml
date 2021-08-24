@@ -9,7 +9,7 @@ services:
   hostname: wordpress
   privileged: true
   networks:
-   dmz:
+   perimetral_dmz:
     ipv4_address: 192.168.120.122
   volumes:
    - iptwordpress:/etc/iptables
@@ -22,7 +22,7 @@ services:
   hostname: moodle
   privileged: true
   networks:
-   dmz:
+   perimetral_dmz:
     ipv4_address: 192.168.120.123
   volumes:
    - iptmoodle:/etc/iptables
@@ -35,19 +35,14 @@ services:
   hostname: dvwa
   privileged: true
   networks:
-   dmz:
+   perimetral_dmz:
     ipv4_address: 192.168.120.124
   volumes:
    - iptdvwa:/etc/iptables
    - dvwamysql:/var/lib/mysql
 networks:
-  dmz:
-    driver: bridge
-    driver_opts:
-     com.docker.network.bridge.name: firewall_dmz
-    ipam:
-     config:
-       - subnet: 192.168.120.0/24
+  perimetral_dmz:
+    external: true
 volumes:
  iptwordpress:
  iptmoodle:

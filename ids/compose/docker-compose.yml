@@ -11,9 +11,9 @@ services:
   sysctls:
     net.ipv4.ip_forward: 1
   networks:
-   dmz:
+   perimetral_dmz:
     ipv4_address: 192.168.120.202
-   sat:
+   perimetral_sat:
     ipv4_address: 192.168.112.202
   volumes:
    - iptrdi:/etc/iptables
@@ -28,36 +28,21 @@ services:
   sysctls:
     net.ipv4.ip_forward: 1
   networks:
-   dmz:
+   perimetral_dmz:
     ipv4_address: 192.168.120.203
-   ext:
+   perimetral_ext:
     ipv4_address: 192.168.200.203
   volumes:
    - iptrde:/etc/iptables
    - snort:/etc/snort
    - /lib/modules:/lib/modules
 networks:
-  sat:
-    driver: bridge
-    driver_opts:
-     com.docker.network.bridge.name: firewall_sat
-    ipam:
-     config:
-       - subnet: 192.168.112.0/24
-  dmz:
-    driver: bridge
-    driver_opts:
-     com.docker.network.bridge.name: firewall_dmz
-    ipam:
-     config:
-       - subnet: 192.168.120.0/24
-  ext:
-    driver: bridge
-    driver_opts:
-     com.docker.network.bridge.name: firewall_ext
-    ipam:
-     config:
-       - subnet: 192.168.200.0/24
+  perimetral_sat:
+    external: true
+  perimetral_dmz:
+    external: true
+  perimetral_ext:
+    external: true
 volumes:
  iptrdi:
  iptrde:

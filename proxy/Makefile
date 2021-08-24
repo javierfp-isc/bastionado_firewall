@@ -1,5 +1,5 @@
 PROJECT="perimetral"
-SERVICES=squid nginx
+SERVICES=squid
 
 #Targets principales
 install:
@@ -28,8 +28,6 @@ info:
 
 ls:
 	docker-compose -p ${PROJECT} -f compose/docker-compose.yml ps
-
-composestop:
 
 fwdown:
 	for s in ${SERVICES};do docker-compose -p ${PROJECT} -f compose/docker-compose.yml exec $$s /usr/sbin/iptables -P INPUT ACCEPT;done

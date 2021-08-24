@@ -17,15 +17,10 @@ services:
     - /sys/fs/cgroup:/sys/fs/cgroup:ro
     - iptelk:/etc/iptables
   networks:
-   sat:
+   perimetral_sat:
     ipv4_address: 192.168.112.150
 networks:
-  sat:
-    driver: bridge
-    driver_opts:
-     com.docker.network.bridge.name: firewall_sat
-    ipam:
-     config:
-       - subnet: 192.168.112.0/24
+  perimetral_sat:
+    external: true
 volumes:
  iptelk:

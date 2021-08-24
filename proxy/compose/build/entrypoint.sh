@@ -13,9 +13,6 @@ echo "nameserver 8.8.4.4" >> /etc/resolv.conf
 #Arrancamos squid
 [ -f /etc/squid/squid.conf ] && service squid start
 
-#Arrancamos nginx
-[ -f /etc/nginx/nginx.conf ] && /usr/sbin/nginx -g 'daemon on; master_process on;'
-
 #Uso exec para lanzar un proceso independiente de bucle infinito
 exec bash -c "while true;do sleep 10;done"
 
