@@ -7,6 +7,9 @@
 echo "nameserver 8.8.8.8" > /etc/resolv.conf
 echo "nameserver 8.8.4.4" >> /etc/resolv.conf
 
+#Arrancamos SimpleHTTPServer (servicio www)
+cd /web && python -m SimpleHTTPServer 80 &
+
 #Cargamos iptables almacenadas
 [ -f /etc/iptables/rules.v4 ] && iptables-restore < /etc/iptables/rules.v4
 
