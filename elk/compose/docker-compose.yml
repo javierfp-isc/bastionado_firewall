@@ -13,14 +13,9 @@ services:
 #    limits:
 #     cpus: 2
 #     memory: 4096M
-  volumes:
-    - /sys/fs/cgroup:/sys/fs/cgroup:ro
-    - iptelk:/etc/iptables
   networks:
    perimetral_sat:
     ipv4_address: 192.168.112.150
 networks:
   perimetral_sat:
     external: true
-volumes:
- iptelk:

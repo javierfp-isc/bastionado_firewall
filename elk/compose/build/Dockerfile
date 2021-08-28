@@ -1,9 +1,9 @@
-FROM jrei/systemd-debian:10
+FROM sebp/elk
 
 ENV TERM xterm
 ENV PATH /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/sbin
 
-LABEL distribucion="ELK En Debian 10 con systemd"
+LABEL distribucion="Imagen ELK sobre Ubuntu"
 LABEL maintainer=javierfp@iessanclemente.net
 
 #Argumento tomado del docker-compose.yml para seleccionar el archivo .env->envfile
