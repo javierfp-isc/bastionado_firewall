@@ -1,6 +1,26 @@
 version: '3.5'
 services:
 #Services
+ hostnvl102:
+  build:
+    context: build
+    args:
+     ENVPATH: hostnvl102.env
+  hostname: hostnvl102
+  privileged: true
+  networks:
+   novlan:
+    ipv4_address: 172.200.10.2
+ hostnvl202:
+  build:
+    context: build
+    args:
+     ENVPATH: hostnvl202.env
+  hostname: hostnvl202
+  privileged: true
+  networks:
+   novlan:
+    ipv4_address: 172.200.20.2
  host102:
   build:
     context: build
@@ -94,10 +114,16 @@ services:
    internet:
     ipv4_address: 172.100.40.200
 networks:
+  novlan:
+    driver: bridge
+    driver_opts:
+     com.docker.network.bridge.name: vlan_novlan
+    ipam:
+     config:
+       - subnet: 172.200.0.0/16
   vlan10:
     driver: macvlan
     driver_opts:
-     com.docker.network.bridge.name: vlan_vlan10
      parent: ${PARENTIF}.10
     ipam:
      config:
@@ -105,7 +131,6 @@ networks:
   vlan20:
     driver: macvlan
     driver_opts:
-     com.docker.network.bridge.name: vlan_vlan20
      parent: ${PARENTIF}.20
     ipam:
      config:
@@ -113,7 +138,6 @@ networks:
   vlan30:
     driver: macvlan
     driver_opts:
-     com.docker.network.bridge.name: vlan_vlan30
      parent: ${PARENTIF}.30
     ipam:
      config:
