@@ -4,6 +4,7 @@ Repositorio para prácticas relacionadas con la seguridad perimetral
 El repositorio consta de los siguentes escenarios
 
 * **firewall**: Escenario para prácticas de Firewall con iptables
+* **vlan**: Escenario ilustrativo del concepto de VLAN
 * **ids**: Escenario para prácticas de IDS/IPS Snort y Suricata
 * **proxy**: Escenario para prácticas de proxy inverso con nginx
 * **services**: Escenario para lanzar servicios web para hacer tests
@@ -79,7 +80,7 @@ Si además queremos eliminar también las imágenes, ejecutamos:
 
 ### Deshabilitar Firewall
 
-En todos los escenarios, menos en **services** y **elk**, se disponen también de dos targets que permiten deshabilitar y habilitar, mediante iptables, netfilter. Realmente lo que hacen es actuar sobre las POLICY de las cadenas INPUT, OUTPUT y FORWARD, estableciendo ésta ACCEPT. El efecto resultante es que el tráfico no se bloquea. Esto puede resultar útil para hacer pruebas sin que el firewall "moleste".
+En todos los escenarios, excepto en **services** **elk** y **vlan**, se disponen también de dos targets que permiten deshabilitar y habilitar, mediante iptables, netfilter. Realmente lo que hacen es actuar sobre las POLICY de las cadenas INPUT, OUTPUT y FORWARD, estableciendo ésta ACCEPT. El efecto resultante es que el tráfico no se bloquea. Esto puede resultar útil para hacer pruebas sin que el firewall "moleste".
 
 Los targets son:
 
