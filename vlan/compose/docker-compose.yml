@@ -1,0 +1,128 @@
+version: '3.5'
+services:
+#Services
+ host102:
+  build:
+    context: build
+    args:
+     ENVPATH: host10.env
+  hostname: host102
+  privileged: true
+  networks:
+   vlan10:
+    ipv4_address: 172.100.10.2
+ host103:
+  build:
+    context: build
+    args:
+     ENVPATH: host10.env
+  hostname: host103
+  privileged: true
+  networks:
+   vlan10:
+    ipv4_address: 172.100.10.3
+ host202:
+  build:
+    context: build
+    args:
+     ENVPATH: host20.env
+  hostname: host202
+  privileged: true
+  networks:
+   vlan20:
+    ipv4_address: 172.100.20.2
+ host203:
+  build:
+    context: build
+    args:
+     ENVPATH: host20.env
+  hostname: host203
+  privileged: true
+  networks:
+   vlan20:
+    ipv4_address: 172.100.20.3
+ host302:
+  build:
+    context: build
+    args:
+     ENVPATH: host30.env
+  hostname: host302
+  privileged: true
+  networks:
+   vlan30:
+    ipv4_address: 172.100.30.2
+ host303:
+  build:
+    context: build
+    args:
+     ENVPATH: host30.env
+  hostname: host303
+  privileged: true
+  networks:
+   vlan30:
+    ipv4_address: 172.100.30.3
+ gw1020:
+  build:
+    context: build
+    args:
+     ENVPATH: gw1020.env
+  hostname: gw1020
+  privileged: true
+  sysctls:
+    net.ipv4.ip_forward: 1
+  networks:
+   vlan10:
+    ipv4_address: 172.100.10.100
+   vlan20:
+    ipv4_address: 172.100.20.100
+   internet:
+    ipv4_address: 172.100.40.100
+ gw2030:
+  build:
+    context: build
+    args:
+     ENVPATH: gw2030.env
+  hostname: gw2030
+  privileged: true
+  sysctls:
+    net.ipv4.ip_forward: 1
+  networks:
+   vlan20:
+    ipv4_address: 172.100.20.200
+   vlan30:
+    ipv4_address: 172.100.30.200
+   internet:
+    ipv4_address: 172.100.40.200
+networks:
+  vlan10:
+    driver: macvlan
+    driver_opts:
+     com.docker.network.bridge.name: vlan_vlan10
+     parent: ${PARENTIF}.10
+    ipam:
+     config:
+       - subnet: 172.100.10.0/24
+  vlan20:
+    driver: macvlan
+    driver_opts:
+     com.docker.network.bridge.name: vlan_vlan20
+     parent: ${PARENTIF}.20
+    ipam:
+     config:
+       - subnet: 172.100.20.0/24
+  vlan30:
+    driver: macvlan
+    driver_opts:
+     com.docker.network.bridge.name: vlan_vlan30
+     parent: ${PARENTIF}.30
+    ipam:
+     config:
+       - subnet: 172.100.30.0/24
+  internet:
+    driver: bridge
+    driver_opts:
+     com.docker.network.bridge.name: vlan_internet
+    ipam:
+     config:
+       - subnet: 172.100.40.0/24
+
