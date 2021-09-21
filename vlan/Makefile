@@ -1,21 +1,16 @@
 PROJECT="vlan"
-SERVICES=host102 host103 gw1020 host202 host203 gw2030 host302 host303
+SERVICES=host102 host103 gw1020 host202 host203 gw2030 host302 host303 host5020 host5031 host5041 host5052 host5062
 
 #Targets principales
-install:
-	docker-compose -p ${PROJECT} --env-file compose/vars.env -f compose/docker-compose.yml up -d
+install: vagrantup
 
-down:
-	docker-compose -p ${PROJECT} --env-file compose/vars.env  -f compose/docker-compose.yml down
+down: composedown vagrantdelete
 
-delete:
-	docker-compose -p ${PROJECT} --env-file compose/vars.env  -f compose/docker-compose.yml down --rmi all -v
+delete: composedelete vagrantdelete
 
-start:
-	docker-compose -p ${PROJECT} --env-file compose/vars.env  -f compose/docker-compose.yml start
+start: vagrantstart
 
-stop:
-	docker-compose -p ${PROJECT} --env-file compose/vars.env  -f compose/docker-compose.yml stop
+stop: vagrantstop
 
 restart: stop start
 
@@ -27,5 +22,29 @@ info:
 
 ls:
 	docker-compose -p ${PROJECT} --env-file compose/vars.env  -f compose/docker-compose.yml ps
+
+#Requisitos
+vagrantup: composeup
+	cd vagrant && vagrant up
+composeup:	
+	docker-compose -p ${PROJECT} --env-file compose/vars.env -f compose/docker-compose.yml up -d
+
+vagrantdelete:
+	cd vagrant && vagrant destroy -f
+composedelete:
+	docker-compose -p ${PROJECT} --env-file compose/vars.env -f compose/docker-compose.yml down --rmi all -v
+
+composedown:
+	docker-compose -p ${PROJECT} --env-file compose/vars.env -f compose/docker-compose.yml down
+
+vagrantstart: composestart
+	cd vagrant && vagrant up
+composestart:
+	docker-compose -p ${PROJECT} --env-file compose/vars.env -f compose/docker-compose.yml start	
+
+vagrantstop: composestop
+	cd vagrant && vagrant halt
+composestop:
+	docker-compose -p ${PROJECT} --env-file compose/vars.env -f compose/docker-compose.yml stop
 
 
