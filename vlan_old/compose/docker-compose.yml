@@ -1,0 +1,219 @@
+version: '3.5'
+services:
+#Services
+ hostnvl102:
+  build:
+    context: build
+    args:
+     ENVPATH: hostnvl102.env
+  hostname: hostnvl102
+  privileged: true
+  networks:
+   novlan:
+    ipv4_address: 172.200.10.2
+ hostnvl202:
+  build:
+    context: build
+    args:
+     ENVPATH: hostnvl202.env
+  hostname: hostnvl202
+  privileged: true
+  networks:
+   novlan:
+    ipv4_address: 172.200.20.2
+ host102:
+  build:
+    context: build
+    args:
+     ENVPATH: host10.env
+  hostname: host102
+  privileged: true
+  networks:
+   vlan10:
+    ipv4_address: 172.100.10.2
+ host103:
+  build:
+    context: build
+    args:
+     ENVPATH: host10.env
+  hostname: host103
+  privileged: true
+  networks:
+   vlan10:
+    ipv4_address: 172.100.10.3
+ host202:
+  build:
+    context: build
+    args:
+     ENVPATH: host20.env
+  hostname: host202
+  privileged: true
+  networks:
+   vlan20:
+    ipv4_address: 172.100.20.2
+ host203:
+  build:
+    context: build
+    args:
+     ENVPATH: host20.env
+  hostname: host203
+  privileged: true
+  networks:
+   vlan20:
+    ipv4_address: 172.100.20.3
+ host302:
+  build:
+    context: build
+    args:
+     ENVPATH: host30.env
+  hostname: host302
+  privileged: true
+  networks:
+   vlan30:
+    ipv4_address: 172.100.30.2
+ host303:
+  build:
+    context: build
+    args:
+     ENVPATH: host30.env
+  hostname: host303
+  privileged: true
+  networks:
+   vlan30:
+    ipv4_address: 172.100.30.3
+ gw1020:
+  build:
+    context: build
+    args:
+     ENVPATH: gw1020.env
+  hostname: gw1020
+  privileged: true
+  sysctls:
+    net.ipv4.ip_forward: 1
+  networks:
+   vlan10:
+    ipv4_address: 172.100.10.100
+   vlan20:
+    ipv4_address: 172.100.20.100
+   internet:
+    ipv4_address: 172.100.40.100
+ gw2030:
+  build:
+    context: build
+    args:
+     ENVPATH: gw2030.env
+  hostname: gw2030
+  privileged: true
+  sysctls:
+    net.ipv4.ip_forward: 1
+  networks:
+   vlan20:
+    ipv4_address: 172.100.20.200
+   vlan30:
+    ipv4_address: 172.100.30.200
+   internet:
+    ipv4_address: 172.100.40.200
+ host5020:
+  build:
+    context: build
+    args:
+     ENVPATH: host50.env
+  hostname: host5020
+  privileged: true
+  volumes:
+   - /lib/modules:/lib/modules
+  networks:
+   vlanpf:
+    ipv4_address: 172.100.50.2
+ host5031:
+  build:
+    context: build
+    args:
+     ENVPATH: host50.env
+  hostname: host5031
+  privileged: true
+  volumes:
+   - /lib/modules:/lib/modules
+  networks:
+   vlanpf:
+    ipv4_address: 172.100.50.3
+ host5041:
+  build:
+    context: build
+    args:
+     ENVPATH: host50.env
+  hostname: host5041
+  privileged: true
+  volumes:
+   - /lib/modules:/lib/modules
+  networks:
+   vlanpf:
+    ipv4_address: 172.100.50.4
+ host5052:
+  build:
+    context: build
+    args:
+     ENVPATH: host50.env
+  hostname: host5052
+  privileged: true
+  volumes:
+   - /lib/modules:/lib/modules
+  networks:
+   vlanpf:
+    ipv4_address: 172.100.50.5
+ host5062:
+  build:
+    context: build
+    args:
+     ENVPATH: host50.env
+  hostname: host5062
+  privileged: true
+  volumes:
+   - /lib/modules:/lib/modules
+  networks:
+   vlanpf:
+    ipv4_address: 172.100.50.6
+networks:
+  novlan:
+    driver: bridge
+    driver_opts:
+     com.docker.network.bridge.name: vlan_novlan
+    ipam:
+     config:
+       - subnet: 172.200.0.0/16
+  vlan10:
+    driver: macvlan
+    driver_opts:
+     parent: ${PARENTIF}.10
+    ipam:
+     config:
+       - subnet: 172.100.10.0/24
+  vlan20:
+    driver: macvlan
+    driver_opts:
+     parent: ${PARENTIF}.20
+    ipam:
+     config:
+       - subnet: 172.100.20.0/24
+  vlan30:
+    driver: macvlan
+    driver_opts:
+     parent: ${PARENTIF}.30
+    ipam:
+     config:
+       - subnet: 172.100.30.0/24
+  internet:
+    driver: bridge
+    driver_opts:
+     com.docker.network.bridge.name: vlan_internet
+    ipam:
+     config:
+       - subnet: 172.100.40.0/24
+  vlanpf:
+    driver: bridge
+    driver_opts:
+     com.docker.network.bridge.name: vlan_pf
+    ipam:
+     config:
+       - subnet: 172.100.50.0/24
+
