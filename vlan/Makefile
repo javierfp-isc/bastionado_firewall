@@ -1,29 +1,29 @@
 PROJECT="vlan"
 
 #Targets principales
-#install: vagrantup
+install: vagrantup
 
-#down: composedown vagrantdelete
+down: composedown vagrantdelete
 
-#delete: composedelete vagrantdelete
+delete: composedelete vagrantdelete
 
-#start: vagrantstart
+start: vagrantstart
 
-#stop: vagrantstop
-
-#restart: stop start
-
-install: composeup
-
-down: composedown 
-
-delete: composedelete
-
-start: composestart
-
-stop: composestop
+stop: vagrantstop
 
 restart: stop start
+
+#install: composeup
+
+#down: composedown 
+
+#delete: composedelete
+
+#start: composestart
+
+#stop: composestop
+
+#restart: stop start
 
 sh:
 	docker-compose -p ${PROJECT} -f compose/docker-compose.yml exec ${service} bash
