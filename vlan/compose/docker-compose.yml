@@ -6,7 +6,7 @@ services:
     context: build
     args:
      ENVPATH: host.env
-  hostname: host10_2
+  hostname: host1x_2
   privileged: true
   volumes:
    - /lib/modules:/lib/modules
@@ -18,7 +18,7 @@ services:
     context: build
     args:
      ENVPATH: host.env
-  hostname: host10_3
+  hostname: host1x_3
   privileged: true
   volumes:
    - /lib/modules:/lib/modules
@@ -30,7 +30,7 @@ services:
     context: build
     args:
      ENVPATH: host.env
-  hostname: host10_4
+  hostname: host1x_4
   privileged: true
   volumes:
    - /lib/modules:/lib/modules
@@ -42,7 +42,7 @@ services:
     context: build
     args:
      ENVPATH: host.env
-  hostname: host10_5
+  hostname: host1x_5
   privileged: true
   volumes:
    - /lib/modules:/lib/modules
