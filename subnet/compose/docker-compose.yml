@@ -1,0 +1,86 @@
+version: '3.5'
+services:
+#Services
+ adm1:
+  build:
+    context: build
+  hostname: adm1
+  privileged: true
+  networks:
+   net:
+ adm100:
+  build:
+    context: build
+  hostname: adm100
+  privileged: true
+  networks:
+   net:    
+ dir1:
+  build:
+    context: build    
+  hostname: dir1
+  privileged: true
+  networks:
+   net:
+ dir5:
+  build:
+    context: build    
+  hostname: dir5
+  privileged: true
+  networks:
+   net:
+ sat1:
+  build:
+    context: build
+  hostname: sat1
+  privileged: true
+  networks:
+   net:
+ sat20:
+  build:
+    context: build
+  hostname: sat20
+  privileged: true
+  networks:
+   net:
+ dmz1:
+  build:
+    context: build
+  hostname: dmz1
+  privileged: true
+  networks:
+   net:
+ dmz10:
+  build:
+    context: build
+  hostname: dmz10
+  privileged: true
+  networks:
+   net:
+ rl:
+  build:
+    context: build    
+  hostname: rl
+  privileged: true
+  sysctls:
+    net.ipv4.ip_forward: 1
+  networks:
+   net:
+ rdi:
+  build:
+    context: build    
+  hostname: rdi
+  privileged: true
+  sysctls:
+    net.ipv4.ip_forward: 1
+  networks:
+   net:
+networks:
+  net:
+    driver: bridge
+    driver_opts:
+     com.docker.network.bridge.name: subnet_net
+    ipam:
+     config:
+       - subnet: 10.10.10.0/24
+
