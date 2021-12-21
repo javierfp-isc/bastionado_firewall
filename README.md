@@ -3,6 +3,7 @@ Repositorio para prácticas relacionadas con la seguridad perimetral
 
 El repositorio consta de los siguentes escenarios
 
+* **subnet**: Escenario para prácticas de Subnetting
 * **firewall**: Escenario para prácticas de Firewall con iptables
 * **vlan**: Escenario ilustrativo del concepto de VLAN
 * **ids**: Escenario para prácticas de IDS/IPS Snort y Suricata
