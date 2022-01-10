@@ -17,6 +17,34 @@ services:
   networks:
    net:
     ipv4_address: 192.168.22.10
+ left:
+  image: redes_ipsec_debian
+  hostname: left
+  sysctls:
+    net.ipv4.ip_forward: 1
+  environment:
+   - DISPLAY=${DISPLAY}
+  volumes:
+   - /tmp/.X11-unix:/tmp/.X11-unix
+   - /lib/modules:/lib/modules
+  privileged: true
+  networks:
+   net:
+    ipv4_address: 192.168.22.11
+ right:
+  image: redes_ipsec_debian
+  hostname: right
+  sysctls:
+    net.ipv4.ip_forward: 1
+  environment:
+   - DISPLAY=${DISPLAY}
+  volumes:
+   - /tmp/.X11-unix:/tmp/.X11-unix
+   - /lib/modules:/lib/modules
+  privileged: true
+  networks:
+   net:
+    ipv4_address: 192.168.22.12
 networks:
   net:
     driver: ipvlan
