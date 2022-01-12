@@ -4,7 +4,7 @@ machines=[
     :box => "pfsense_2.5.1",
     :ram => 2048,
     :cpu => 1,
-    :bridgelan => "di-442bdf668d2d",
+    :bridgelan => "<ipvlan_bridge>",
   }
 ]
 
