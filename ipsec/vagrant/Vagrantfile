@@ -1,10 +1,19 @@
 machines=[
   {
-    :hostname => "pfsenseipsec",
+    :hostname => "pfspsoe",
     :box => "pfsense_2.5.1",
     :ram => 2048,
     :cpu => 1,
-    :bridgelan => "di-442bdf668d2d",
+    :bridgelan => "<ipvlan_psoe>",
+    :bridgewan => "<ipvlan_wan>",
+  },
+  {
+    :hostname => "pfspp",
+    :box => "pfsense_2.5.1",
+    :ram => 2048,
+    :cpu => 1,
+    :bridgelan => "<ipvlan_pp>",
+    :bridgewan => "<ipvlan_wan>",
   }
 ]
 
