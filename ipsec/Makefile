@@ -1,15 +1,15 @@
 PROJECT="redes_ipsec"
 
 #Targets principales
-install: vagrantup
+install: sustup composeup vagrantup
 
-down: composedown vagrantdelete
+down: sustdown composedown vagrantdelete
 
-delete: composedelete vagrantdelete
+delete: sustdown composedelete vagrantdelete
 
-start: vagrantstart
+start: composestart vagrantstart
 
-stop: vagrantstop
+stop: composestop vagrantstop
 
 restart: stop start
 
@@ -23,34 +23,33 @@ ls:
 	docker-compose -p ${PROJECT} -f compose/docker-compose.yml ps
 
 #Requisitos
-vagrantup: composeup
+vagrantup:
+	cd vagrant && vagrant up
+composeup:	
+	docker-compose -p ${PROJECT} -f compose/docker-compose.yml up -d	
+sustup:
 	sed -i "s/<ipvlan_pp>/di-$(shell docker network ls | grep redes_ipsec_pp | cut -d' ' -f1)/" vagrant/Vagrantfile
 	sed -i "s/<ipvlan_psoe>/di-$(shell docker network ls | grep redes_ipsec_psoe | cut -d' ' -f1)/" vagrant/Vagrantfile
 	sed -i "s/<ipvlan_wan>/di-$(shell docker network ls | grep redes_ipsec_wan | cut -d' ' -f1)/" vagrant/Vagrantfile
-	cd vagrant && vagrant up
-composeup:	
-	docker-compose -p ${PROJECT} -f compose/docker-compose.yml up -d
 	
 vagrantdelete:
 	cd vagrant && vagrant destroy -f
 composedelete:
-	sed -i "s/di-$(shell docker network ls | grep redes_ipsec_pp | cut -d' ' -f1)/<ipvlan_pp>/" vagrant/Vagrantfile
-	sed -i "s/di-$(shell docker network ls | grep redes_ipsec_psoe | cut -d' ' -f1)/<ipvlan_psoe>/" vagrant/Vagrantfile
-	sed -i "s/di-$(shell docker network ls | grep redes_ipsec_wan | cut -d' ' -f1)/<ipvlan_wan>/" vagrant/Vagrantfile
 	docker-compose -p ${PROJECT} -f compose/docker-compose.yml down --rmi all -v
 
 composedown:
+	docker-compose -p ${PROJECT} -f compose/docker-compose.yml down
+sustdown:
 	sed -i "s/di-$(shell docker network ls | grep redes_ipsec_pp | cut -d' ' -f1)/<ipvlan_pp>/" vagrant/Vagrantfile
 	sed -i "s/di-$(shell docker network ls | grep redes_ipsec_psoe | cut -d' ' -f1)/<ipvlan_psoe>/" vagrant/Vagrantfile
 	sed -i "s/di-$(shell docker network ls | grep redes_ipsec_wan | cut -d' ' -f1)/<ipvlan_wan>/" vagrant/Vagrantfile
-	docker-compose -p ${PROJECT} -f compose/docker-compose.yml down
-
-vagrantstart: composestart
+	
+vagrantstart:
 	cd vagrant && vagrant up
 composestart:
 	docker-compose -p ${PROJECT} -f compose/docker-compose.yml start	
 
-vagrantstop: composestop
+vagrantstop:
 	cd vagrant && vagrant halt
 composestop:
 	docker-compose -p ${PROJECT} -f compose/docker-compose.yml stop
