@@ -1,0 +1,39 @@
+machines=[
+  {
+    :hostname => "pfspsoe",
+    :box => "pfsense_2.5.1",
+    :ram => 2048,
+    :cpu => 1,
+    :bridgelan => "<ipvlan_psoe>",
+    :bridgewan => "<ipvlan_wan>",
+  },
+  {
+    :hostname => "pfspp",
+    :box => "pfsense_2.5.1",
+    :ram => 2048,
+    :cpu => 1,
+    :bridgelan => "<ipvlan_pp>",
+    :bridgewan => "<ipvlan_wan>",
+  }
+]
+
+Vagrant.configure(2) do |config|
+  machines.each do |machine|
+      config.vm.define machine[:hostname] do |node|
+          node.vm.box = machine[:box]
+          node.vm.hostname = machine[:hostname]
+          node.vm.boot_timeout = 10
+          if machine.key?(:bridgelan)
+            node.vm.network "public_network", bridge: machine[:bridgelan]
+          end
+          if machine.key?(:bridgewan)
+            node.vm.network "public_network", bridge: machine[:bridgewan]
+          end
+          node.vm.provider "virtualbox" do |vb|
+              vb.customize ["modifyvm", :id, "--memory", machine[:ram]]
+              vb.name = machine[:hostname]
+              vb.linked_clone = true
+          end
+        end
+      end
+    end
