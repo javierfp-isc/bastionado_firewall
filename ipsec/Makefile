@@ -24,7 +24,7 @@ ls:
 
 #Requisitos
 vagrantup:
-	cd vagrant && vagrant up
+	-cd vagrant && vagrant up ; vagrant up
 composeup:	
 	docker-compose -p ${PROJECT} -f compose/docker-compose.yml up -d	
 sustup:
@@ -45,7 +45,7 @@ sustdown:
 	sed -i "s/di-$(shell docker network ls | grep redes_ipsec_wan | cut -d' ' -f1)/<ipvlan_wan>/" vagrant/Vagrantfile
 	
 vagrantstart:
-	cd vagrant && vagrant up
+	-cd vagrant && vagrant up ; vagrant up
 composestart:
 	docker-compose -p ${PROJECT} -f compose/docker-compose.yml start	
 
