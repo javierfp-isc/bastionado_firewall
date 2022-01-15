@@ -62,8 +62,7 @@ services:
     ipv4_address: 192.168.24.10
 networks:
   net:
-    driver: ipvlan
-    internal: true
+    driver: bridge
     ipam:
      config:
        - subnet: 192.168.22.0/24
