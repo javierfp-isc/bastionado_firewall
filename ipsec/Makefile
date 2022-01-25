@@ -26,7 +26,8 @@ ls:
 vagrantup:
 	-cd vagrant && vagrant up ; vagrant up
 composeup:	
-	docker-compose -p ${PROJECT} -f compose/docker-compose.yml up -d	
+	docker-compose -p ${PROJECT} -f compose/docker-compose.yml up -d
+	-xhost si:localuser:root	
 sustup:
 	sed -i "s/<ipvlan_pp>/di-$(shell docker network ls | grep redes_ipsec_pp | cut -d' ' -f1)/" vagrant/Vagrantfile
 	sed -i "s/<ipvlan_psoe>/di-$(shell docker network ls | grep redes_ipsec_psoe | cut -d' ' -f1)/" vagrant/Vagrantfile
@@ -47,7 +48,8 @@ sustdown:
 vagrantstart:
 	-cd vagrant && vagrant up ; vagrant up
 composestart:
-	docker-compose -p ${PROJECT} -f compose/docker-compose.yml start	
+	docker-compose -p ${PROJECT} -f compose/docker-compose.yml start
+	-xhost si:localuser:root
 
 vagrantstop:
 	cd vagrant && vagrant halt
