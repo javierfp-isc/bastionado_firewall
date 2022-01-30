@@ -8,11 +8,16 @@ services:
      ENVPATH: adm.env
   hostname: adm1
   privileged: true
+#  logging:
+#   driver: syslog
+#   options:
+#    syslog-address: udp://192.168.110.1:1111
   networks:
    adm:
     ipv4_address: 192.168.110.111
   volumes:
    - iptadm1:/etc/iptables
+#   - /var/log/messages:/var/log/messages
  adm2:
   image: perimetral_adm1
   hostname: adm2
