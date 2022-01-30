@@ -14,10 +14,7 @@ services:
   volumes:
    - iptadm1:/etc/iptables
  adm2:
-  build:
-    context: build
-    args:
-     ENVPATH: adm.env
+  image: perimetral_adm1
   hostname: adm2
   privileged: true
   networks:
@@ -50,10 +47,7 @@ services:
   volumes:
    - iptsat1:/etc/iptables
  sat2:
-  build:
-    context: build
-    args:
-     ENVPATH: sat.env
+  image: perimetral_sat1
   hostname: sat2
   privileged: true
   networks:
