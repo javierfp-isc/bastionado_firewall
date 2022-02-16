@@ -92,7 +92,6 @@ services:
    - /lib/modules:/lib/modules
   networks:
    vlan2:
-    ipv4_address: 172.0.2.3
  hostpf21_2:
   image: vlan_base
   hostname: hostpf21_2
@@ -101,7 +100,6 @@ services:
    - /lib/modules:/lib/modules
   networks:
    bridgepf20:
-    ipv4_address: 172.0.20.2
  hostpf21_3:
   image: vlan_base
   hostname: hostpf21_3
@@ -110,7 +108,6 @@ services:
    - /lib/modules:/lib/modules
   networks:
    bridgepf20:
-    ipv4_address: 172.0.20.3
  hostpf22_2:
   image: vlan_base
   hostname: hostpf22_2
@@ -119,7 +116,6 @@ services:
    - /lib/modules:/lib/modules
   networks:
    bridgepf20:
-    ipv4_address: 172.0.20.4
  hostpf22_3:
   image: vlan_base
   hostname: hostpf22_3
@@ -128,7 +124,6 @@ services:
    - /lib/modules:/lib/modules
   networks:
    bridgepf20:
-    ipv4_address: 172.0.20.5
 networks:
   bridge10:
     driver: bridge
