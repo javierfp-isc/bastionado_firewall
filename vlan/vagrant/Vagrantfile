@@ -17,6 +17,8 @@ Vagrant.configure(2) do |config|
 	  node.vm.network "public_network", bridge: "bridgepf20"
 	  node.vm.network "public_network", bridge: "bridgepf20"
 	  node.vm.network "public_network", bridge: "bridgepf20"
+	  #node.vm.network "public_network", bridge: "bridgepf30"
+	  #node.vm.network "public_network", bridge: "bridgepf30"  
           
           
           node.vm.provider "virtualbox" do |vb|
