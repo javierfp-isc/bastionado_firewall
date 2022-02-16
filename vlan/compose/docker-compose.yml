@@ -1,11 +1,17 @@
 version: '3.5'
 services:
 #Services
- host1x_2:
+ base:
   build:
     context: build
     args:
      ENVPATH: host.env
+  networks:
+   bridgepf20:
+   bridgepf30:
+  command: exit
+ host1x_2:
+  image: vlan_base
   hostname: host1x_2
   privileged: true
   volumes:
@@ -14,10 +20,7 @@ services:
    bridge10:
     ipv4_address: 172.0.10.2
  host1x_3:
-  build:
-    context: build
-    args:
-     ENVPATH: host.env
+  image: vlan_base
   hostname: host1x_3
   privileged: true
   volumes:
@@ -26,10 +29,7 @@ services:
    bridge10:
     ipv4_address: 172.0.10.3
  host1x_4:
-  build:
-    context: build
-    args:
-     ENVPATH: host.env
+  image: vlan_base
   hostname: host1x_4
   privileged: true
   volumes:
@@ -38,10 +38,7 @@ services:
    bridge10:
     ipv4_address: 172.0.10.4
  host1x_5:
-  build:
-    context: build
-    args:
-     ENVPATH: host.env
+  image: vlan_base
   hostname: host1x_5
   privileged: true
   volumes:
@@ -50,10 +47,7 @@ services:
    bridge10:
     ipv4_address: 172.0.10.5
  host0_2:
-  build:
-    context: build
-    args:
-     ENVPATH: host.env
+  image: vlan_base
   hostname: host0_2
   privileged: true
   sysctls:
@@ -64,10 +58,7 @@ services:
    vlbridge0:
     ipv4_address: 172.0.0.2
  host1_2:
-  build:
-    context: build
-    args:
-     ENVPATH: host.env
+  image: vlan_base
   hostname: host1_2
   privileged: true
   volumes:
@@ -76,10 +67,7 @@ services:
    vlan1:
     ipv4_address: 172.0.1.2
  host1_3:
-  build:
-    context: build
-    args:
-     ENVPATH: host.env
+  image: vlan_base
   hostname: host1_3
   privileged: true
   volumes:
@@ -88,10 +76,7 @@ services:
    vlan1:
     ipv4_address: 172.0.1.3
  host2_2:
-  build:
-    context: build
-    args:
-     ENVPATH: host.env
+  image: vlan_base
   hostname: host2_2
   privileged: true
   volumes:
@@ -100,10 +85,7 @@ services:
    vlan2:
     ipv4_address: 172.0.2.2
  host2_3:
-  build:
-    context: build
-    args:
-     ENVPATH: host.env
+  image: vlan_base
   hostname: host2_3
   privileged: true
   volumes:
@@ -112,10 +94,7 @@ services:
    vlan2:
     ipv4_address: 172.0.2.3
  hostpf21_2:
-  build:
-    context: build
-    args:
-     ENVPATH: host.env
+  image: vlan_base
   hostname: hostpf21_2
   privileged: true
   volumes:
@@ -124,10 +103,7 @@ services:
    bridgepf20:
     ipv4_address: 172.0.20.2
  hostpf21_3:
-  build:
-    context: build
-    args:
-     ENVPATH: host.env
+  image: vlan_base
   hostname: hostpf21_3
   privileged: true
   volumes:
@@ -136,10 +112,7 @@ services:
    bridgepf20:
     ipv4_address: 172.0.20.3
  hostpf22_2:
-  build:
-    context: build
-    args:
-     ENVPATH: host.env
+  image: vlan_base
   hostname: hostpf22_2
   privileged: true
   volumes:
@@ -148,10 +121,7 @@ services:
    bridgepf20:
     ipv4_address: 172.0.20.4
  hostpf22_3:
-  build:
-    context: build
-    args:
-     ENVPATH: host.env
+  image: vlan_base
   hostname: hostpf22_3
   privileged: true
   volumes:
@@ -181,6 +151,13 @@ networks:
     ipam:
      config:
        - subnet: 172.0.20.0/24
+  bridgepf30:
+    driver: bridge
+    driver_opts:
+     com.docker.network.bridge.name: bridgepf30
+    ipam:
+     config:
+       - subnet: 172.0.30.0/24
   vlan1:
     driver: macvlan
     driver_opts:
@@ -195,4 +172,3 @@ networks:
     ipam:
      config:
        - subnet: 172.0.2.0/24
-
