@@ -7,6 +7,7 @@ services:
     args:
      ENVPATH: host.env
   networks:
+   vlbridge0:
    bridgepf20:
    bridgepf30:
   command: exit
@@ -115,7 +116,7 @@ services:
   volumes:
    - /lib/modules:/lib/modules
   networks:
-   bridgepf20:
+   bridgepf30:
  hostpf22_3:
   image: vlan_base
   hostname: hostpf22_3
@@ -123,7 +124,7 @@ services:
   volumes:
    - /lib/modules:/lib/modules
   networks:
-   bridgepf20:
+   bridgepf30:
 networks:
   bridge10:
     driver: bridge
@@ -140,19 +141,13 @@ networks:
      config:
        - subnet: 172.0.0.0/24
   bridgepf20:
-    driver: bridge
+    driver: macvlan
     driver_opts:
-     com.docker.network.bridge.name: bridgepf20
-    ipam:
-     config:
-       - subnet: 172.0.20.0/24
+     parent: vlbridge0.20
   bridgepf30:
-    driver: bridge
+    driver: macvlan
     driver_opts:
-     com.docker.network.bridge.name: bridgepf30
-    ipam:
-     config:
-       - subnet: 172.0.30.0/24
+     parent: vlbridge0.30
   vlan1:
     driver: macvlan
     driver_opts:
