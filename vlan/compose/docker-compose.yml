@@ -92,6 +92,7 @@ services:
    - /lib/modules:/lib/modules
   networks:
    vlan2:
+    ipv4_address: 172.0.2.3
  hostpf21_2:
   image: vlan_base
   hostname: hostpf21_2
