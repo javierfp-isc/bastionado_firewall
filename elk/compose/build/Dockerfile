@@ -1,4 +1,4 @@
-FROM sebp/elk
+FROM sebp/elk:7.17.1
 
 ENV TERM xterm
 ENV PATH /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/sbin
