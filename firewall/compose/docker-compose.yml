@@ -7,7 +7,9 @@ services:
     args:
      ENVPATH: adm.env
   hostname: adm1
-  privileged: true
+  cap_add:
+   - ALL
+  #privileged: true
 #  logging:
 #   driver: syslog
 #   options:
@@ -21,7 +23,9 @@ services:
  adm2:
   image: perimetral_adm1
   hostname: adm2
-  privileged: true
+  #privileged: true
+  cap_add:
+   - ALL
   networks:
    adm:
     ipv4_address: 192.168.110.112
@@ -33,7 +37,9 @@ services:
     args:
      ENVPATH: dir.env
   hostname: dir1
-  privileged: true
+  #privileged: true
+  cap_add:
+   - ALL
   networks:
    dir:
     ipv4_address: 192.168.111.112
@@ -45,7 +51,9 @@ services:
     args:
      ENVPATH: sat.env
   hostname: sat1
-  privileged: true
+  #privileged: true
+  cap_add:
+   - ALL
   networks:
    sat:
     ipv4_address: 192.168.112.113
@@ -54,7 +62,9 @@ services:
  sat2:
   image: perimetral_sat1
   hostname: sat2
-  privileged: true
+  #privileged: true
+  cap_add:
+   - ALL
   networks:
    sat:
     ipv4_address: 192.168.112.114
@@ -66,7 +76,9 @@ services:
     args:
      ENVPATH: www.env
   hostname: www
-  privileged: true
+  #privileged: true
+  cap_add:
+   - ALL
   networks:
    dmz:
     ipv4_address: 192.168.120.121
@@ -78,7 +90,9 @@ services:
     args:
      ENVPATH: rl.env
   hostname: rl
-  privileged: true
+  #privileged: true
+  cap_add:
+   - ALL
   sysctls:
     net.ipv4.ip_forward: 1
   networks:
@@ -96,7 +110,9 @@ services:
     args:
      ENVPATH: rdi.env
   hostname: rdi
-  privileged: true
+  #privileged: true
+  cap_add:
+   - ALL
   sysctls:
     net.ipv4.ip_forward: 1
   networks:
@@ -112,7 +128,9 @@ services:
     args:
      ENVPATH: rde.env
   hostname: rde
-  privileged: true
+  #privileged: true
+  cap_add:
+   - ALL
   sysctls:
     net.ipv4.ip_forward: 1
   networks:
