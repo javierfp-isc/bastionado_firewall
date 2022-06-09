@@ -7,9 +7,8 @@ services:
     args:
      ENVPATH: rdi.env
   hostname: rdi
-  #privileged: true
   cap_add:
-   - ALL
+  - ALL
   sysctls:
     net.ipv4.ip_forward: 1
   networks:
@@ -26,9 +25,8 @@ services:
     args:
      ENVPATH: rde.env
   hostname: rde
-  #privileged: true
   cap_add:
-   - ALL
+  - ALL
   sysctls:
     net.ipv4.ip_forward: 1
   networks:

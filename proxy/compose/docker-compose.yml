@@ -7,7 +7,8 @@ services:
     args:
      ENVPATH: squid.env
   hostname: squid
-  privileged: true
+  cap_add:
+  - ALL
   networks:
    perimetral_sat:
     ipv4_address: 192.168.112.200

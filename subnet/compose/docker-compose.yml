@@ -5,63 +5,72 @@ services:
   build:
     context: build
   hostname: adm1
-  privileged: true
+  cap_add:
+  - ALL
   networks:
    net:
  adm100:
   build:
     context: build
   hostname: adm100
-  privileged: true
+  cap_add:
+  - ALL
   networks:
    net:    
  dir1:
   build:
     context: build    
   hostname: dir1
-  privileged: true
+  cap_add:
+  - ALL
   networks:
    net:
  dir5:
   build:
     context: build    
   hostname: dir5
-  privileged: true
+  cap_add:
+  - ALL
   networks:
    net:
  sat1:
   build:
     context: build
   hostname: sat1
-  privileged: true
+  cap_add:
+  - ALL
   networks:
    net:
  sat20:
   build:
     context: build
   hostname: sat20
-  privileged: true
+  cap_add:
+  - ALL
   networks:
    net:
  dmz1:
   build:
     context: build
   hostname: dmz1
-  privileged: true
+  cap_add:
+  - ALL
   networks:
    net:
  dmz10:
   build:
     context: build
   hostname: dmz10
-  privileged: true
+  cap_add:
+  - ALL
   networks:
    net:
  rl:
   build:
     context: build    
   hostname: rl
-  privileged: true
+  cap_add:
+  - ALL
   sysctls:
     net.ipv4.ip_forward: 1
   networks:
@@ -70,7 +79,8 @@ services:
   build:
     context: build    
   hostname: rdi
-  privileged: true
+  cap_add:
+  - ALL
   sysctls:
     net.ipv4.ip_forward: 1
   networks:
