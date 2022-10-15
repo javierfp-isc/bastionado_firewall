@@ -5,9 +5,9 @@ services:
     context: build
     args:
      ENVPATH: debian.env
-  command: exit
+  entrypoint: bash -c "exit"
   networks:
-   wan:
+   net:
  left:
   image: redes_ipsec_debian
   hostname: left
@@ -38,53 +38,53 @@ services:
   networks:
    net:
     ipv4_address: 192.168.22.12
- pedro:
-  image: redes_ipsec_debian
-  hostname: pedro
-  environment:
-   - DISPLAY=${DISPLAY}
-  volumes:
-   - /tmp/.X11-unix:/tmp/.X11-unix
-   - /lib/modules:/lib/modules
-  cap_add:
-  - ALL
-  networks:
-   psoe:
-    ipv4_address: 192.168.23.10
- pablo:
-  image: redes_ipsec_debian
-  hostname: pablo
-  environment:
-   - DISPLAY=${DISPLAY}
-  volumes:
-   - /tmp/.X11-unix:/tmp/.X11-unix
-   - /lib/modules:/lib/modules
-  cap_add:
-  - ALL
-  networks:
-   pp:
-    ipv4_address: 192.168.24.10
+# pedro:
+#  image: redes_ipsec_debian
+#  hostname: pedro
+#  environment:
+#   - DISPLAY=${DISPLAY}
+#  volumes:
+#   - /tmp/.X11-unix:/tmp/.X11-unix
+#   - /lib/modules:/lib/modules
+#  cap_add:
+#  - ALL
+#  networks:
+#   psoe:
+#    ipv4_address: 192.168.23.10
+# pablo:
+#  image: redes_ipsec_debian
+#  hostname: pablo
+#  environment:
+#   - DISPLAY=${DISPLAY}
+#  volumes:
+#   - /tmp/.X11-unix:/tmp/.X11-unix
+#   - /lib/modules:/lib/modules
+#  cap_add:
+#  - ALL
+#  networks:
+#   pp:
+#    ipv4_address: 192.168.24.10
 networks:
   net:
     driver: bridge
     ipam:
      config:
        - subnet: 192.168.22.0/24
-  psoe:
-    driver: ipvlan
-    internal: true
-    ipam:
-     config:
-       - subnet: 192.168.23.0/24
-  pp:
-    driver: ipvlan
-    internal: true
-    ipam:
-     config:
-       - subnet: 192.168.24.0/24
-  wan:
-    driver: ipvlan
-    internal: true
-    ipam:
-     config:
-       - subnet: 192.168.25.0/24
+#  psoe:
+#    driver: ipvlan
+#    internal: true
+#    ipam:
+#     config:
+#       - subnet: 192.168.23.0/24
+#  pp:
+#    driver: ipvlan
+#    internal: true
+#    ipam:
+#     config:
+#       - subnet: 192.168.24.0/24
+#  wan:
+#    driver: ipvlan
+#    internal: true
+#    ipam:
+#     config:
+#       - subnet: 192.168.25.0/24

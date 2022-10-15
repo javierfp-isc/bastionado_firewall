@@ -1,15 +1,20 @@
 PROJECT="redes_ipsec"
 
 #Targets principales
-install: composeup sustup vagrantup
+#install: composeup sustup vagrantup
+install: composeup
 
-down: sustdown composedown vagrantdelete
+#down: sustdown composedown vagrantdelete
+down: composedown
 
-delete: sustdown composedelete vagrantdelete
+#delete: sustdown composedelete vagrantdelete
+delete: composedelete
 
-start: composestart vagrantstart
+#start: composestart vagrantstart
+start: composestart
 
-stop: composestop vagrantstop
+#stop: composestop vagrantstop
+stop: composestop
 
 restart: stop start
 
