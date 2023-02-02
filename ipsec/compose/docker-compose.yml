@@ -1,15 +1,19 @@
 version: '3.5'
 services:
- debian:
+# debian:
+#  build:
+#    context: build
+#    args:
+#     ENVPATH: debian.env
+#  entrypoint: bash -c "exit"
+#  networks:
+#   net:
+ left:
+  #image: redes_ipsec_debian
   build:
     context: build
     args:
      ENVPATH: debian.env
-  entrypoint: bash -c "exit"
-  networks:
-   net:
- left:
-  image: redes_ipsec_debian
   hostname: left
   sysctls:
     net.ipv4.ip_forward: 1
@@ -24,7 +28,11 @@ services:
    net:
     ipv4_address: 192.168.22.11
  right:
-  image: redes_ipsec_debian
+  #image: redes_ipsec_debian
+  build:
+    context: build
+    args:
+     ENVPATH: debian.env
   hostname: right
   sysctls:
     net.ipv4.ip_forward: 1
