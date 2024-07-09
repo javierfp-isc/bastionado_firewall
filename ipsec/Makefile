@@ -19,19 +19,19 @@ stop: composestop
 restart: stop start
 
 sh:
-	docker-compose -p ${PROJECT} -f compose/docker-compose.yml exec ${service} bash
+	docker compose -p ${PROJECT} -f compose/docker-compose.yml exec ${service} bash
 
 info:
 	docker inspect ${PROJECT}_${service}_1
 
 ls:
-	docker-compose -p ${PROJECT} -f compose/docker-compose.yml ps
+	docker compose -p ${PROJECT} -f compose/docker-compose.yml ps
 
 #Requisitos
 vagrantup:
 	-cd vagrant && vagrant up ; vagrant up
 composeup:	
-	docker-compose -p ${PROJECT} -f compose/docker-compose.yml up -d
+	docker compose -p ${PROJECT} -f compose/docker-compose.yml up -d
 	-xhost si:localuser:root	
 sustup:
 	sed -i "s/<ipvlan_pp>/di-$(shell docker network ls | grep redes_ipsec_pp | cut -d' ' -f1)/" vagrant/Vagrantfile
@@ -41,10 +41,10 @@ sustup:
 vagrantdelete:
 	cd vagrant && vagrant destroy -f
 composedelete:
-	docker-compose -p ${PROJECT} -f compose/docker-compose.yml down --rmi all -v
+	docker compose -p ${PROJECT} -f compose/docker-compose.yml down --rmi all -v
 
 composedown:
-	docker-compose -p ${PROJECT} -f compose/docker-compose.yml down
+	docker compose -p ${PROJECT} -f compose/docker-compose.yml down
 sustdown:
 	sed -i "s/di-$(shell docker network ls | grep redes_ipsec_pp | cut -d' ' -f1)/<ipvlan_pp>/" vagrant/Vagrantfile
 	sed -i "s/di-$(shell docker network ls | grep redes_ipsec_psoe | cut -d' ' -f1)/<ipvlan_psoe>/" vagrant/Vagrantfile
@@ -53,12 +53,12 @@ sustdown:
 vagrantstart:
 	-cd vagrant && vagrant up ; vagrant up
 composestart:
-	docker-compose -p ${PROJECT} -f compose/docker-compose.yml start
+	docker compose -p ${PROJECT} -f compose/docker-compose.yml start
 	-xhost si:localuser:root
 
 vagrantstop:
 	cd vagrant && vagrant halt
 composestop:
-	docker-compose -p ${PROJECT} -f compose/docker-compose.yml stop
+	docker compose -p ${PROJECT} -f compose/docker-compose.yml stop
 
 
