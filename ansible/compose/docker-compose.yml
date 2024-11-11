@@ -1,0 +1,40 @@
+services:
+#Services
+ server:
+  build:
+    context: build
+    args:
+     ENVPATH: server.env
+  hostname: server
+  cap_add:
+  - ALL
+  networks:
+   adm:
+    ipv4_address: 192.168.110.100
+  volumes:
+   - iptserver:/etc/iptables
+ host:
+  build:
+    context: build
+    args:
+     ENVPATH: host.env
+  hostname: host
+  cap_add:
+  - ALL
+  networks:
+   dir:
+    ipv4_address: 192.168.110.10
+  volumes:
+   - ipthost:/etc/iptables
+networks:
+  ansible:
+    driver: bridge
+    driver_opts:
+     com.docker.network.bridge.name: firewall_ansible
+    ipam:
+     config:
+       - subnet: 192.168.110.0/24  
+volumes:
+ iptserver:
+ ipthost:
+
