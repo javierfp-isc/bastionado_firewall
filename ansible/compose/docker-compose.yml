@@ -1,18 +1,18 @@
 services:
 #Services
- server:
+ ansible:
   build:
     context: build
     args:
-     ENVPATH: server.env
-  hostname: server
+     ENVPATH: ansible.env
+  hostname: ansible
   cap_add:
   - ALL
   networks:
    adm:
     ipv4_address: 192.168.110.100
   volumes:
-   - iptserver:/etc/iptables
+   - iptansible:/etc/iptables
  host:
   build:
     context: build
@@ -26,6 +26,20 @@ services:
     ipv4_address: 192.168.110.10
   volumes:
    - ipthost:/etc/iptables
+ server:
+  build:
+    context: build
+    args:
+     ENVPATH: server.env
+  hostname: server
+  cap_add:
+  - ALL
+  networks:
+   dir:
+    ipv4_address: 192.168.110.50
+  volumes:
+   - iptserver:/etc/iptables
+ 
 networks:
   ansible:
     driver: bridge
@@ -35,6 +49,7 @@ networks:
      config:
        - subnet: 192.168.110.0/24  
 volumes:
+ iptansible:
  iptserver:
  ipthost:
 
