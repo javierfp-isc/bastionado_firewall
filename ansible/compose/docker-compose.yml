@@ -9,7 +9,7 @@ services:
   cap_add:
   - ALL
   networks:
-   adm:
+   ansible:
     ipv4_address: 192.168.110.100
   volumes:
    - iptansible:/etc/iptables
@@ -22,7 +22,7 @@ services:
   cap_add:
   - ALL
   networks:
-   dir:
+   ansible:
     ipv4_address: 192.168.110.10
   volumes:
    - ipthost:/etc/iptables
@@ -35,7 +35,7 @@ services:
   cap_add:
   - ALL
   networks:
-   dir:
+   ansible:
     ipv4_address: 192.168.110.50
   volumes:
    - iptserver:/etc/iptables
@@ -44,7 +44,7 @@ networks:
   ansible:
     driver: bridge
     driver_opts:
-     com.docker.network.bridge.name: firewall_ansible
+     com.docker.network.bridge.name: ansible
     ipam:
      config:
        - subnet: 192.168.110.0/24  

@@ -1,7 +1,7 @@
 FROM debian:bookworm
 
-ENV TERM xterm
-ENV PATH /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+ENV TERM=xterm
+ENV PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 
 LABEL distribucion="Debian"
 LABEL maintainer=javierfp@iessanclemente.net
